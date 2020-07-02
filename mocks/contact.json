@@ -1,0 +1,106 @@
+{
+    "name": "Mudit Mittal",
+    "address": {
+      "city": "Dehradun",
+      "country": "India"
+    },
+    "accountType":"employee",
+    "experience": "2",
+    "skills": ["Java","Javascript"],
+    "tels": { 
+      "id": 1, 
+      "number": "+91 9897-222-976" 
+    },
+    "emails": { 
+      "id": 1, 
+      "email": "mudit@gmail.com" 
+    },
+    "previousExperience": [
+      {
+        "post":"Web Dev Intern",
+        "company":"CapX Creative Portal",
+        "duration":"Apr 2020 to Jun 2020",
+        "desc":"Angular Development with tasks related to API configuration"
+      },
+      {
+        "post":"Android Intern",
+        "company":"Sunfox Techs",
+        "duration":"May 2019 to July 2019",
+        "desc":"Worked on company's live projects"
+      }
+    ],
+    "education":[
+      {
+        "course":"Bachelor of Technology",
+        "major":"Comuter Science",
+        "passingYear":"2020",
+        "grade":"80%"
+      },
+      {
+        "course":"12th ISC",
+        "major":"PCM with Computer Science",
+        "passingYear":"2016",
+        "grade":"90%"
+      },
+      {
+        "course":"10th ICSE",
+        "major":"PCMB with Computer Science",
+        "passingYear":"2014",
+        "grade":"90%"
+      }
+    ],
+    "projects":[
+      {
+        "name":"Project Name 1",
+        "workedOn":"Technology 1",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc":"Worked on company's live projectslorem ipsum dolem trot sulior mplulorem ipsum dolem trot sulior mplu"
+      },
+      {
+        "name":"Project Name 2",
+        "workedOn":"Technology 2",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc":"Worked on company's live projects"
+      },
+      {
+        "name":"Project Name 3",
+        "workedOn":"Technology 3",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc":"Worked on company's live projects's live projects's live projects's live projects"
+      }
+    ],
+    "accomplishments":[
+      {
+        "accomplishment": "Accomplishment 1",
+        "issuedBy": "Issued by 1",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc": "lorem ipsum dolem trot sulior mplulorem ipsum dolem trot sulior mplu"
+      },
+      {
+        "accomplishment": "Accomplishment 1",
+        "issuedBy": "Issued by 1",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc": "lorem ipsum dolem trot sulior mplulorem ipsum dolem trot sulior mplu"
+      },
+      {
+        "accomplishment": "Accomplishment 1",
+        "issuedBy": "Issued by 1",
+        "duration": "Apr 2020 to Jun 2020",
+        "desc": "lorem ipsum dolem trot sulior mplulorem ipsum dolem trot sulior mplu"
+      }
+    ],
+    "socialLinks":[
+      {
+        "name":"portfolio",
+        "link":"https://link.com"
+      },
+      {
+        "name":"github",
+        "link":"https://link.com"
+      },
+      {
+        "name":"linkedin",
+        "link":"https://link.com"
+      }
+    ]
+}
