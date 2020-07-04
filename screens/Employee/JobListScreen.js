@@ -35,17 +35,34 @@ export default function JobListScreen(props)  {
     }
     
   })
+  let goToDetails=(item)=>{
+    setSearchStatus('searching');
+    firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid)
+        .get().then((userData)=>{
+          props.navigation.push("JobDetails", {
+            ...item, 
+            newCandidate: 
+            ([{
+              uid: userData.data().uid,
+              displayName: userData.data().displayName
+            }]).concat(item.candidates)
+          });
+        }).then(()=>{
+          setSearchStatus('searched');
+        })
+  }
+
 
     return (
       <View style={styles.container}>
         <Text style={{color: 'rgb(0,100,200)',fontSize: 18, alignSelf: "center", textTransform: "uppercase"}} onPress={()=> props.navigation.goBack()}>Find Jobs</Text>
-        {
-          searchStatus == 'searching' &&
+      {
+        searchStatus == 'searching' ?
           <View style={{alignSelf: "center", marginTop: 32}}>
             {/* <Text style={{fontSize: 12, color: 'blue'}}>Loading Jobs..</Text> */}
             <ActivityIndicator size="large"></ActivityIndicator>
           </View>
-        }
+          :
 
         <ScrollView style={{paddingVertical:12}} showsHorizontalScrollIndicator={false}>
         { jobs.length!=0 && jobs.map((item, idx)=> (
@@ -81,7 +98,7 @@ export default function JobListScreen(props)  {
               />
               <TouchableOpacity>
                 <Ionicons
-                onPress={()=>{props.navigation.push("JobDetails", item)}}
+                onPress={()=> goToDetails(item) }
                 style={{marginTop: 4, alignSelf:"center"}}
                 name="ios-arrow-forward" size={24} color="#01b9b6"
                 >
@@ -93,9 +110,10 @@ export default function JobListScreen(props)  {
           )
         }
         </ScrollView>
-
+      }
       </View>
     )
+
 }
 
 const styles = StyleSheet.create({
