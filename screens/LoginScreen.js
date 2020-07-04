@@ -94,10 +94,10 @@ export default class LoginScreen extends React.Component {
       </TouchableOpacity>
 
       <View style={styles.googleFbView} >
-        <TouchableOpacity style={styles.buttonGoogle} onPress={()=>this.handleLoginGoogleFb('google')}>
+        <TouchableOpacity style={styles.buttonGoogle} onPress={(event)=>{event.preventDefault(); this.handleLoginGoogleFb('google');}}>
           <Text style={{ color: "#FFF", fontWeight: "500"}}>Google</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonFb} onPress={()=>this.handleLoginGoogleFb('facebook')}>
+        <TouchableOpacity style={styles.buttonFb} onPress={(event)=>{event.preventDefault();this.handleLoginGoogleFb('facebook')}}>
           <Text style={{ color: "#FFF", fontWeight: "500"}}>Facebook</Text>
         </TouchableOpacity>
       </View>

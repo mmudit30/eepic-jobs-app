@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import * as firebase from 'firebase';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import SetAccountTypeScreen from './SetAccountTypeScreen';
+import * as firebase from 'firebase';
 require("firebase/firestore");
 
 
@@ -12,6 +12,7 @@ export default class HomeScreen extends React.Component {
   };
 
   state={
+    searchStatus: '',
     doc: null,
     uid: "",
     email: "",
@@ -22,10 +23,12 @@ export default class HomeScreen extends React.Component {
   componentDidMount=async ()=>{
     this.setState({
       uid: await firebase.auth().currentUser.uid,
-      doc: await firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid)
+      doc: await firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid),
+      searchStatus: 'searching'
     })
       this.state.doc.get().then((data) => {
         if (data.exists) {
+          this.setState({ searchStatus : 'searched' })
             if(data.data().accountType){
               this.setState({ accountType: data.data().accountType, displayName: data.data().displayName })
             }
@@ -33,6 +36,7 @@ export default class HomeScreen extends React.Component {
               this.props.navigation.push("SetAccountType");
             }
         } else {
+          this.setState({ searchStatus : 'empty' })
             console.log("No such document!");
         }
         }).catch(function(error) {
@@ -60,19 +64,36 @@ export default class HomeScreen extends React.Component {
   render (){
     return (
     <View style={styles.container}>
-      <TouchableOpacity style={{ marginTop: 32 }} onPress={this.signOutUser}>
-        <Text>Log Out</Text>
+      <TouchableOpacity style={styles.buttonLogout} onPress={this.signOutUser}>
+        <Text style={{ color: "#FFF", fontWeight: "500"}}>Log Out</Text>
       </TouchableOpacity>
+      {
+          this.state.searchStatus == 'searching' &&
+          <View style={{alignSelf: "center", marginTop: 32}}>
+            {/* <Text style={{fontSize: 12, color: 'blue'}}>Loading Jobs..</Text> */}
+            <ActivityIndicator size="large"></ActivityIndicator>
+          </View>
+      }
 
 
-      <Text>Hi {this.state.displayName}!</Text>
-      <Text>{this.state.email}</Text>
-      <Text>
+      { this.state.searchStatus == 'searched' && 
+      <View style={{paddingHorizontal: 30}}>
+      <Text style={styles.text}>Hi {this.state.displayName}!</Text>
+      <Text style={styles.text}>{this.state.email}</Text>
+      <Text style={styles.text}>
         Your account type is:
         {this.state.accountType}
       </Text>
 
-      <View style={{marginVertical: 30}}>
+      <View style={{marginTop: 30}}>
+        <TouchableOpacity style={styles.button}
+            onPress={()=>this.props.navigation.push("EditProfile")}
+            >
+            <Text style={{ color: "#FFF", fontWeight: "500"}}>Edit Profile</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View>
         <TouchableOpacity style={styles.button}
             onPress={()=>this.props.navigation.push("Profile")}
             >
@@ -95,7 +116,7 @@ export default class HomeScreen extends React.Component {
 
       {
         (this.state.accountType === "employer" && 
-        <View style={{ marginVertical: 30 }}>
+        <View>
           <TouchableOpacity style={styles.button}
             onPress={()=>this.props.navigation.push("PostJob")}
             >
@@ -106,6 +127,15 @@ export default class HomeScreen extends React.Component {
       }
 
 
+      </View>
+      }
+      {
+        this.state.searchStatus == 'empty' && 
+        <View style={{alignContent: "center", justifyContent: "center"}}>
+          <Text style={{alignSelf: "center" ,fontSize: 16, color: '#000'}}>Login Again Please</Text>
+        </View>
+      }
+
     </View>
     )
   }
@@ -114,18 +144,37 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30
+    paddingTop: 30,
+    backgroundColor: '#01b9b611'
     // alignItems: "center",
     // justifyContent: "center",
+  },
+  text:{
+    fontSize: 16,
+    marginBottom: 8,
+    fontWeight: '300'
   },
   button:{
     marginHorizontal: 30,
     marginVertical:30,
     paddingHorizontal: 20,
-    backgroundColor: "rgb(50,50,199)",
+    backgroundColor: "#01b9b6e2",
     borderRadius: 4,
     height: 52,
     alignItems: "center",
     justifyContent: "center"
+  },
+  buttonLogout:{
+    marginHorizontal: 30,
+    marginVertical:30,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+    backgroundColor: "rgb(199,50,50)",
+    borderRadius: 100,
+    width: 70,
+    height: 70,
+    alignItems: "center",
+    justifyContent: "center"
   }
+
 });
