@@ -1,19 +1,15 @@
 {
+    "accountType":"employee",
+    "email": "mudit@gmail.com",
     "name": "Mudit Mittal",
+    "number": "+91 9897-222-976",
+    "skills": ["Java","Javascript"],
+    "experience": "2",
+    
     "address": {
       "city": "Dehradun",
+      "state": "Uttarakhand",
       "country": "India"
-    },
-    "accountType":"employee",
-    "experience": "2",
-    "skills": ["Java","Javascript"],
-    "tels": { 
-      "id": 1, 
-      "number": "+91 9897-222-976" 
-    },
-    "emails": { 
-      "id": 1, 
-      "email": "mudit@gmail.com" 
     },
     "previousExperience": [
       {
