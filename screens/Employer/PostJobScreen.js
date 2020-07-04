@@ -7,7 +7,7 @@ export default function PostJobScreen({navigation}) {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [postedBy, setPostedBy] = useState('')
+  const [postedBy, setPostedBy] = useState('');
   const [jobsPosted, setJobsPosted] = useState([]);
   const [jobTitle, setJobTitle] = useState(""); //1
   const [jobDescription, setJobDescription] = useState(""); //2
@@ -16,6 +16,8 @@ export default function PostJobScreen({navigation}) {
   const [jobLocation, setJobLocation] = useState(['']); //7
   const [jobOpenings, setJobOpenings] = useState(''); //6
   const [lastDate, setLastDate] = useState(''); //5
+  const [salary, setSalary] = useState(''); //8
+
 
   useEffect(() => {
     setPostedBy(firebase.auth().currentUser.uid);
@@ -29,7 +31,7 @@ export default function PostJobScreen({navigation}) {
     setSkillsRequired( skillsRequired.map(str => str.trim() ) );
     setJobLocation( jobLocation.map(str => str.trim() ) );
     let jobData={
-      jobTitle, jobDescription, skillsRequired, companyName, jobLocation, jobOpenings, lastDate, postedBy
+      jobTitle, salary, jobDescription, skillsRequired, companyName, jobLocation, jobOpenings, lastDate, postedBy, candidates: []
     }
     console.log(jobData);
 
@@ -123,6 +125,14 @@ export default function PostJobScreen({navigation}) {
             style={styles.input} autoCapitalize="none"
             onChangeText={text => setLastDate(text)}
             value={lastDate}
+            ></TextInput>
+          </View>
+          <View style={{marginTop: 32}}>
+            <Text style={styles.inputTitle}>Salary (Monthly)</Text>
+            <TextInput
+            style={styles.input} autoCapitalize="none"
+            onChangeText={text => setSalary(text)}
+            value={salary}
             ></TextInput>
           </View>
         </View>
