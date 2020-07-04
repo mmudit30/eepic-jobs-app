@@ -73,6 +73,7 @@ class ProfileScreen extends Component {
   })
 
   state={
+    uid:                  '',
     photoURL:             'https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png',
     searchStatus:         '',
     accountType:          '',
@@ -101,18 +102,18 @@ class ProfileScreen extends Component {
     ]
   }
   componentDidMount=()=>{
-    this.setState({searchStatus: 'searching'})
-    console.log(firebase.auth().currentUser.uid);
-      
-    firebase.firestore().collection('users').doc(firebase.auth().currentUser.uid).get()
+    console.log(this.props.navigation.state.params);
+    
+    this.setState({
+      uid: this.props.navigation.state.params.propUid,
+      searchStatus: 'searching',
+    })
+    firebase.firestore().collection('users').doc(this.props.navigation.state.params.propUid.trim()).get()
       .then(doc => {
+        console.log(doc);
+        console.log(doc.data());
 
-        
-        console.log(this.state.photoURL);
-        if(doc.data().photoURL)             this.setState({ photoURL: doc.data().photoURL});
-        console.log(doc.data().photoURL);
-        console.log(this.state.photoURL);
-        
+        // if(doc.data().photoURL)             this.setState({ photoURL: doc.data().photoURL});
         if(doc.data().email)                this.setState({ email: doc.data().email});
         if(doc.data().accountType)          this.setState({ accountType: doc.data().accountType});
         if(doc.data().displayName)          this.setState({ displayName: doc.data().displayName});
@@ -125,8 +126,6 @@ class ProfileScreen extends Component {
         if(doc.data().projects)             this.setState({ projects:  doc.data().projects});
         if(doc.data().accomplishments)      this.setState({ accomplishments:  doc.data().accomplishments});
         if(doc.data().socialLinks)          this.setState({ socialLinks:  doc.data().socialLinks});
-        console.log('Searched');
-        
         this.setState({
           searchStatus: 'searched'
         });
@@ -170,7 +169,7 @@ class ProfileScreen extends Component {
                 headers: {
                   
                 },
-                uri: 'https://lh3.googleusercontent.com/a-/AOh14GhRx-jlNyIVQnUT3OeHS-Ky7_JkYp3JA8YsjTdwBhU'
+                uri: this.state.photoURL
               }}
             />
             <Text style={styles.userNameText}>{name}</Text>
