@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import * as firebase from 'firebase';
-import { ScrollView, FlatList } from 'react-native-gesture-handler';
+import { ScrollView, FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 require("firebase/firestore");
 import {Ionicons} from '@expo/vector-icons';
 
 
 
 JobListScreen.navigationOptions={
-  headerShown: false
+  // headerShown: false
 };
 export default function JobListScreen(props)  {
   
@@ -30,7 +30,7 @@ export default function JobListScreen(props)  {
         setSearchStatus('searched');
         if(resArr.length == 0)
         setSearchStatus('empty');
-        setJobs(resArr);        
+        setJobs(resArr);
       })
     }
     
@@ -49,7 +49,7 @@ export default function JobListScreen(props)  {
 
         <ScrollView style={{paddingVertical:12}} showsHorizontalScrollIndicator={false}>
         { jobs.length!=0 && jobs.map((item, idx)=> (
-            <View key={idx} style={styles.item}>
+            <View key={idx} style={styles.item} >
               <Text style={{fontSize: 16, color: '#01b9b6'}}>
                 {item.jobTitle} 
               </Text>
@@ -79,11 +79,14 @@ export default function JobListScreen(props)  {
                   borderBottomWidth: 0.5,
                 }}
               />
-              <Ionicons
-              style={{marginTop: 4, alignSelf:"center"}}
-              name="ios-arrow-forward" size={24} color="#01b9b6"
-              >
-              </Ionicons>
+              <TouchableOpacity>
+                <Ionicons
+                onPress={()=>{props.navigation.push("JobDetails", item)}}
+                style={{marginTop: 4, alignSelf:"center"}}
+                name="ios-arrow-forward" size={24} color="#01b9b6"
+                >
+                </Ionicons>
+              </TouchableOpacity>
 
             </View>
             )
@@ -99,6 +102,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 30,
+    paddingBottom: 20,
     marginHorizontal: 20
     // alignItems: 'center',
     // justifyContent: 'center',

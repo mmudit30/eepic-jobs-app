@@ -34,19 +34,18 @@ export default function PostJobScreen({navigation}) {
     console.log(jobData);
 
     firebase.firestore().collection('jobs')
-      .add({
-        ...jobData
-      })
+      .add({...jobData})
       .then(({id}) =>{
         console.log("Added job in job");
         const newArr = jobsPosted.concat([id+'']);
-        console.log(newArr);
-        firebase.firestore().collection('users').doc(postedBy)
-          .set({
-            jobsPosted: newArr
-          }, {merge: true})
+        // console.log(newArr);
+        firebase.firestore().collection('jobs').doc(id).set({jobId: id}, {merge: true})
+          .then(()=>'added id to job')
+          .catch((err)=>console.log("error", err));
+        firebase.firestore().collection('users').doc(postedBy).set({jobsPosted: newArr}, {merge: true})
           .then(()=> navigation.goBack())
-      })
+          .catch((err)=> console.log("error", err));
+      }).catch((err)=>console.log("error", err));
   }
 
   let postJomb = () =>{
