@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
     uid: "",
     email: "",
     accountType: "",
-    displayName:""
+    displayName:"",
   }
 
   componentDidMount=async ()=>{
@@ -47,11 +47,11 @@ export default class HomeScreen extends React.Component {
     this.setState({email});
   }
   componentDidUpdate=()=>{
-    // console.log(this.state.accountType);    
+    // console.log(this.state.accountType);
   }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);    
-    if (nextProps.navigation.state.params.type) {
+  componentWillReceiveProps(nextProps='') {
+    console.log(nextProps);
+    if(nextProps != '' && nextProps.navigation.state.params.type) {
       this.setState({accountType: nextProps.navigation.state.params.type});
     }
   }
@@ -95,7 +95,7 @@ export default class HomeScreen extends React.Component {
 
       <View>
         <TouchableOpacity style={styles.button}
-            onPress={()=>this.props.navigation.push("Profile")}
+            onPress={()=>this.props.navigation.push("Profile", {propUid: this.state.uid})}
             >
             <Text style={{ color: "#FFF", fontWeight: "500"}}>Profile</Text>
         </TouchableOpacity>
@@ -105,11 +105,22 @@ export default class HomeScreen extends React.Component {
       {
         (this.state.accountType === "employee" && 
         <View>
-          <TouchableOpacity style={styles.button}
-            onPress={()=>this.props.navigation.push("JobList")}
-            >
-            <Text style={{ color: "#FFF", fontWeight: "500"}}>Search Jobs</Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={styles.button}
+              onPress={()=>this.props.navigation.push("JobList")}
+              >
+              <Text style={{ color: "#FFF", fontWeight: "500"}}>Search Jobs</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TouchableOpacity style={styles.button}
+              onPress={()=>this.props.navigation.push("JobsApplied")}
+              >
+              <Text style={{ color: "#FFF", fontWeight: "500"}}>Applied Jobs</Text>
+            </TouchableOpacity>
+          </View>
+
         </View>
         )
       }
@@ -117,11 +128,21 @@ export default class HomeScreen extends React.Component {
       {
         (this.state.accountType === "employer" && 
         <View>
-          <TouchableOpacity style={styles.button}
-            onPress={()=>this.props.navigation.push("PostJob")}
-            >
-            <Text style={{ color: "#FFF", fontWeight: "500"}}>Post A Job</Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={styles.button}
+              onPress={()=>this.props.navigation.push("PostJob")}
+              >
+              <Text style={{ color: "#FFF", fontWeight: "500"}}>Post A Job</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+              <TouchableOpacity style={styles.button}
+                onPress={()=>this.props.navigation.push("JobsPosted")}
+                >
+                <Text style={{ color: "#FFF", fontWeight: "500"}}>Jobs Posted</Text>
+              </TouchableOpacity>
+          </View>
         </View>
         )
       }
