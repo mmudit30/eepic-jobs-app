@@ -9,7 +9,9 @@ import * as firebase from 'firebase';
 import SetAccountTypeScreen from './screens/SetAccountTypeScreen';
 import JobListScreen from './screens/Employee/JobListScreen';
 import PostJobScreen from './screens/Employer/PostJobScreen';
-import ProfileScreen from './screens/Profile';
+import ProfileScreen from './screens/Profile/ProfileScreen';
+import EditProfileScreen from './screens/EditProfileScreen';
+import JobDetailsScreen from './screens/JobDetailsScreen';
 
 import {decode, encode} from 'base-64';
 require("firebase/firestore");
@@ -33,10 +35,12 @@ firebase.initializeApp(firebaseConfig);
 
 const AppStack = createStackNavigator({
   Home: HomeScreen,
-  PostJob: PostJobScreen,
   JobList: JobListScreen,
-  SetAccountType: SetAccountTypeScreen,
+  JobDetails: JobDetailsScreen,
+  EditProfile: EditProfileScreen,
+  PostJob: PostJobScreen,
   Profile: ProfileScreen,
+  SetAccountType: SetAccountTypeScreen,
 })
 
 const AuthStack = createStackNavigator({
