@@ -26,14 +26,6 @@ if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
 var firebaseConfig = {
-  apiKey: "AIzaSyC1QQtou2Wb4gytHp7-iltxbPRrkpBUyck",
-  authDomain: "epic-jobs.firebaseapp.com",
-  databaseURL: "https://epic-jobs.firebaseio.com",
-  projectId: "epic-jobs",
-  storageBucket: "epic-jobs.appspot.com",
-  messagingSenderId: "540226969010",
-  appId: "1:540226969010:web:0e8e6fc3270db366b758ab",
-  measurementId: "G-2CLPP7675F"
 };
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
