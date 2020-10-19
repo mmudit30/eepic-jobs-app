@@ -166,9 +166,9 @@ export default class JobDetailsScreen extends React.Component {
 
                 }
                 <View style={{
-                    marginTop: 12,
+                    marginTop: 13,
                     borderBottomColor: '#01b9b6c3',
-                    borderBottomWidth: 0.5,
+                    borderBottomWidth: 0.6,
                     }}
                     />
                 </View>
