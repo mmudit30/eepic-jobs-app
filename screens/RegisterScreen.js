@@ -75,7 +75,7 @@ export default class RegisterScreen extends React.Component {
         </View>
     
         <View style={{marginTop: 32}}>
-          <Text style={styles.inputTitle}>Email address</Text>
+          <Text style={styles.inputTitle}>Email Address</Text>
           <TextInput style={styles.input} autoCapitalize="none"
           onChangeText={email => this.setState({email})}
           value={this.state.email}

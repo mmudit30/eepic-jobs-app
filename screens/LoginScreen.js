@@ -78,7 +78,7 @@ export default class LoginScreen extends React.Component {
           ></TextInput>
         </View>
 
-        <View style={{marginTop: 32}}>
+        <View style={{marginTop: 30}}>
           <Text style={styles.inputTitle}>Password</Text>
           <TextInput style={styles.input} secureTextEntry autoCapitalize="none" 
             onChangeText={password => this.setState({password})}
@@ -104,7 +104,7 @@ export default class LoginScreen extends React.Component {
 
 
       <TouchableOpacity
-       style={{ alignSelf: "center", marginTop: 32 }}
+       style={{ alignSelf: "center", marginTop: 30 }}
        onPress={()=>{this.props.navigation.navigate("Register")}}
         >
         <Text style={{ color: "#414969", fontSize: 13}}>
